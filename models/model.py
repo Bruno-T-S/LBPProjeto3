@@ -1,10 +1,11 @@
 class Usuario:
-    def __init__(self, usuario, senha):
+    def __init__(self, id, usuario, senha):
+        self.id = id
         self.usuario = usuario
         self.senha = senha
 
-def add_usuario(lista_usuarios, user):
-    lista_usuarios.append(user)
-
 lista_usuarios = []
 
+def addUsuario(usuario, senha):
+    id = len(lista_usuarios) + 1
+    lista_usuarios.append(Usuario(id, usuario, senha))
