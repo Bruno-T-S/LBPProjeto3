@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <nav class="navbar">
+  <div>
+    <a href="/"> </a>
+    {% if session.get('id')  %}
+        <ul>
+            <li>
+                <a class="nav-link {% if request.path == '/dashboard' %}active{% endif %}" href="/dashboard">Dashboard</a>
+            </li>
+        </ul>
+    {% endif %}
+    {% if request.path != "/login" %}
+        <form action="logout" class="d-flex px-4">
+          <button class="btn btn-secondary" type="submit">Sair</button>
+        </form>
+    {% endif %}
+</div>
+</nav>
+<h1>Seja bem vindo, {{ usuario }}</h1>
+
+</body>
+</html>
+
+<nav>

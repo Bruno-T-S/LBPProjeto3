@@ -15,7 +15,7 @@ def validarSenha(senha, senha_validacao, maiusculas=maiusculas, numeros=numeros,
     if senha == senha_validacao:
         igual_validacao = True
 
-    if len(senha) >= 8 and len(senha) <=12:
+    if len(senha) >= 8 and len(senha) <=64:
         tamanho_correto = True
     for char in senha:
         if char in maiusculas:
@@ -28,9 +28,10 @@ def validarSenha(senha, senha_validacao, maiusculas=maiusculas, numeros=numeros,
     return nao_vazio, tamanho_correto, igual_validacao, tem_maiuscula, tem_numero, tem_especial
 def validarLogin(nome):
     nao_vazio = True
+    tamanho = False
     if nome == "":
         nao_vazio = False
     if len(nome) >= 3:
-        return nao_vazio, True
-    return nao_vazio, False
+        tamanho = True
+    return nao_vazio, tamanho
 

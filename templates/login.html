@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logar</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <form action="/login" method="post" id="cadastro" name="cadastro">
         <label>Login</label>
         <input type="text" name="login" id="login" placeholder="Crie o seu login" required>
         <label>Senha</label>
-        <input type="text" name="senha" id="senha" placeholder="Cria a sua senha" required>
-        <button type="submit" class="botao-enviar">Enviar</button>
+        <input type="password" name="senha" id="senha" placeholder="Crie a sua senha" required>
+        <button type="submit" id="botao-enviar" class="botao-enviar">Enviar</button>
     </form>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 </body>
 </html>
