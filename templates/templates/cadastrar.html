@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="feedback-form">
+        <h2 class="header">Crie sua conta!</h2>
+        <form action="/cadastrar" method="post" id="cadastro" name="cadastro">
+            <label>Login</label>
+            <input type="text" name="login" id="login" placeholder="Crie o seu login" required>
+            <label>Senha</label>
+            <input type="password" name="senha" id="senha" placeholder="Crie a sua senha" required>
+            <label>Confirmação</label>
+            <input type="password" name="confirmacao" id="confirmacao" placeholder="Repita a senha" required>
+            <button type="submit" class="botao-enviar">Enviar</button>
+        </form>
+    </div>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <p class="paragraph">Caso desejar, clique <a href="/">aqui</a> para voltar à tela inicial.</p>
+</body>
+</html>

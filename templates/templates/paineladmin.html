@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administradores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div>
+          <a href="/"> </a>
+          {% if request.path != "/login" %}
+          <form action="{{ url_for('usuario.logout') }}">
+                <button id="botao-enviar" class="botao-enviar" type="submit">Sair</button>
+              </form>
+          {% endif %}
+        </div>
+      </nav>
+
+    <h1 class="centralizar">Transforme um usuário em admin</h1>
+
+    <div class="centralizar">
+
+        <form action="/loja/admin" method="post" id="transformar" name="transformar">
+            <label for="usuario">Escolha um usuário:</label>
+            <select name="usuario" id="usuario" required>
+                {% for usuario in usuarios %}
+                    {% if not usuario.admin %}
+                        <option value="{{ usuario.login }}">{{ usuario.login }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <button type="submit" class="botao-enviar">Transformar em Admin</button>
+        </form>
+    <br><br>
+    </div>
+    <h2>Lista de Administradores:</h2>
+    {% for usuario in usuarios %}
+        {% if usuario.admin %}
+            <p class="paragraph">{{ usuario.login }}</p>
+        {% endif %}
+    {% endfor %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <b><li class="{{ category }}">{{ message }}</li></b>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <br><br>
+    <p class="paragraph">Caso desejar, clique <a href="/">aqui</a> para voltar à loja.</p>
+
+</body>
+</html>
